@@ -5,7 +5,7 @@
 チーズの職人を目指す学校を紹介し、生徒を募集するためのwebサイト
 
 ## ③アプリのデプロイURL
-
+https://takeo-yamaguchi-15.github.io/html_name_00/
 
 ## ④アプリのログイン用IDまたはPassword（ある場合）
 なし
