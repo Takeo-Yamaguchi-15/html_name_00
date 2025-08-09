@@ -1,0 +1,319 @@
+<!DOCTYPE html> <!-- HTML5 宣言: ブラウザを最新標準モードにする -->
+<html lang="ja"> <!-- 文書全体の言語を日本語に設定（SEO & 音声読み上げ用） -->
+
+<head>
+  <meta charset="utf-8" /> <!-- 文字コードを UTF-8 に固定し文字化けを防止 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- ビューポート設定: スマホで 1 CSSpx = 物理解像度px に近づける スマホで“文字が豆粒”になる問題を解決 レスポンシブデザイン-->
+
+  <title>Cheese ACADEMY TOKYO</title> <!-- タブ／検索結果タイトル -->
+
+  <!-- ===== 外部リソース ===== -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <!-- サイト全体のスタイル。キャッシュされ保守しやすい -->
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <!-- Google Fonts に先行接続し表示遅延を軽減 fonts.gstatic.com は “Cookie 無し + 超長期キャッシュ + グローバル POP” のフォント特化 CDN-->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Noto Sans JP を 400 / 700 ウェイトで読み込み。display=swap でフォールバック → 本フォントへ置換 “どのフォント・どの太さ・どう読み込むか” を URL 1 行で指定できる便利 API-->
+</head>
+
+<body id="top"><!-- #top はページ先頭へのアンカー -->
+
+  <!-- ========== Header ========== -->
+  <header class="header"> <!-- HTML5 セクショニング: ページ全体ヘッダー ページ全体の“上部バー”を表す HTML5 の正式タグ 画面読み上げソフトが「これはヘッダーですよ」と理解できる。CSS で .header として装飾もしやすい。-->
+    <div class="inner"> <!-- 幅 1200px に中央寄せするラッパー レイアウト用ラッパー 後の CSS で max-width:1200px; margin:auto; を当て、中央寄せ・左右余白をまとめて管理。 ヘッダー内の中身だけ幅をそろえられる。-->
+
+      <h1 class="logo"> <!-- サイトのメインロゴであり h1 見出し サイトの1番大きな見出し 検索エンジンは <h1> を“ページの題名”とみなします。ロゴ画像しかなくても、意味的には一番大事なタイトルになる。-->
+        <a href="#top"> <!-- クリックでページ最上部へ ユーザーがどの下層でもトップに戻りやすい慣習的 UI。 ページ移動を増やす回遊性アップ。-->
+          <img src="./img/header_logo.png" alt="Cheese ACADEMY TOKYO" />
+          <!-- alt テキストはロゴ文字列を入れ SEO とアクセシビリティ向上 -->
+        </a>
+      </h1>
+
+      <nav class="nav" aria-label="サイト主要ナビゲーション">
+        <!-- nav で“主リンク集”を明示／aria-label で支援技術にも親切 この中が“主メニュー”だと機械に宣言。aria-label で読み上げ時の説明もセット。 視覚に頼らないユーザーがショートカットで一発アクセスできる。-->
+        <ul><!-- Flex で横並び 	#about など id と同名のアンカーへジャンプ。 -->
+          <li><a href="#about"   class="nav-link">ABOUT</a></li>
+          <li><a href="#course"  class="nav-link">COURSE</a></li>
+          <li><a href="#news"    class="nav-link">NEWS</a></li>
+          <li><a href="#access"  class="nav-link">ACCESS</a></li>
+          <li><a href="#contact" class="nav-link">CONTACT</a></li>
+          <!-- nav-link 疑似要素でホバー下線アニメーション  CSS で下線アニメ等を当てるためのフック。-->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<!-- 
+1,header と nav の使い分け
+header は“上部全体の箱”、nav は“その中のメニュー部分”というイメージ。
+2,CSS 連携
+.header → 固定表示・影 (box-shadow)
+.inner → 中央寄せ・幅制限
+.nav-link → ::after 疑似要素でホバー時に下線を伸ばすアニメーション
+3,アクセシビリティの利益
+ロゴ画像に alt があるので、画像が読めない人もサイト名が分かる。
+aria-label で「サイト主要ナビゲーションです」と読み上げられる。
+見出し構造が正しい (h1 は1ページに1回) → スクリーンリーダーの“見出しジャンプ”が快適。 -->
+
+
+  <!-- ========== Main ========== -->
+  <main class="wrap1200"><!-- 最大 1200px・左右 auto で中央固定 	- <main> は HTML5 公式タグ。「ここが本文」と機械に伝える。wrap1200 は後の CSS で max-width:1200px; margin:auto; → 画面が広くても読みやすい幅に固定。-->
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <!-- 背景画像を CSS の background + fixed でパララックス風 ファーストビュー全体の箱 CSS 側で background: url() center/cover fixed を当て、スクロールしても画像が遅れて動く“パララックス”効果を実現。HTML には余計な <img> を置かないのでマークアップがスッキリ。-->
+      <div class="hero-inner"><!-- Grid で天地中央配置 CSS で display:grid; place-items:center を適用 → 高さも幅もど真ん中にテキストを配置-->
+         <!-- ページにつき２番目の重要見出し（h1 の次）。検索エンジンにも “主テーマ” が伝わる。 -->
+        <h2 class="hero-title">セカイを変えるチーズを作ろう</h2> 
+        <p class="hero-sub">
+          チーズ職人養成学校<br />
+          「チーズアカデミーTOKYO」
+          <!-- <br> で意図的改行。CSS 改行なら span+display:block でも可 -->
+        </p>
+        <a href="#contact" class="btn primary wide">まずは資料請求</a>
+        <!-- primary / wide でボタン色と幅をバリエーション 行動ボタン (CTA) href="#contact" でページ下部の「お問い合わせフォーム」へジャンプ。- btn primary wide という３つのクラスで「ボタン化」「黄色い主ボタン」「幅 220px 固定」を同時指定。-->
+      </div>
+    </section>
+
+<!-- 
+構造タグ（main, section, h2）＋汎用クラスで「意味」と「見た目」を分離。
+CSS の background:… fixed と Grid の place-items:center を組み合わせると HTML 1 行でパララックス＆中央配置が実現。
+ボタンは共通クラス化 (btn primary wide) しておくと、他ページでも再利用しやすくなる。 
+-->
+
+
+    <!-- ===== About ===== -->
+    <section id="about" class="section" data-animate>
+      <!-- data-animate は later JS(IntersectionObserver) のトリガー - あとで JS が読んで“スクロール表示アニメ”を発火するためのスイッチ。-->
+      <h3 class="sec-head">About</h3>
+      <p class="lead">チーズアカデミーについて</p>
+
+      <div class="about-text"><!-- Grid + gap で行間を均等制御 display:grid; gap:.5rem; により すべての <p> の間隔を一括管理。個別の margin を書かなくてOK。-->
+        <p>チーズアカデミーは、チーズ職人養成学校です。</p>
+        <p>チーズの素晴らしさを、自給自足を通じて、できるだけ多くの人に知っていただきたい。</p>
+        <p>そして、食卓にはいつもチーズがあった、あの頃の当たり前をこの手で取り戻したい。</p>
+        <p>そんな思いから、チーズ職人養成学校「チーズアカデミーTOKYO」は歩みを始めています。</p>
+        <p>卒業後、チーズ自給自足のバックアップはもちろんのこと、</p>
+        <p>チーズ職人への就職・転職もサポートします。</p>
+      </div>
+
+      <div class="about-gallery">
+        <!-- auto-fit + minmax で可変枚数ギャラリー CSS で grid-template-columns:repeat(auto-fit,minmax(160px,1fr)) ⇒ 自動で列数が増減するレスポンシブレイアウト。-->
+        <img src="./img/about_01.jpg" alt="" />
+        <img src="./img/about_02.jpg" alt="" />
+        <img src="./img/about_03.jpg" alt="" />
+        <img src="./img/about_04.jpg" alt="" />
+      </div>
+    </section>
+
+<!-- 
+Grid の gap は “行間 / 列間” を一発調整,旧来の margin-bottom 連打より、余白変更が楽＆揺れが出ない。
+auto-fit + minmax() でレスポンシブ,ウィンドウが狭まれば 4 ▶ 2 ▶ 1 列と自動で折り返す。メディアクエリが減らせる。 
+-->
+
+
+    <!-- ===== Course ===== -->
+    <section id="course" class="section" data-animate>
+      <div class="course-head">
+        <h3 class="sec-head">COURSE</h3>
+        <p class="lead">
+          未経験からでもスタートができるよう、カリキュラムは多くの専門家や<br />
+          現役チーズ職人のアドバイスのもと作られました。
+        </p>
+      </div>
+
+      <div class="course-stack"><!-- Flex 縦積み。各 item で左右配置 CSS で display:flex; flex-direction:column; gap:0 → 3 つの講座を縦積み。-->
+        <!-- ── 1: 画像左 / 文右 ── display:flex; align-items:stretch 画像と文章を横並びに-->
+        <div class="course-item">
+          <!-- 固定 50 % 幅。<figure> は意味的に「メディアと説明」の要素。 -->
+          <figure><img src="./img/course_01.jpg" alt="" /></figure>
+          <div class="course-text">
+            <h4>本格的な農園を使った実地研修</h4>
+            <p>本格的な農園を使った実地研修</p>
+            <p>チーズアカデミーでは、本格的な農園を使った実地研修を</p>
+            <p>行うことができます。プロとして活躍するチーズ職人も</p>
+            <p>使用するような、広大で環境も整った農園を余すところ</p>
+            <p>なく使い、卒業時には本格的なチーズを自分の力で作れる</p>
+            <p>実践力の養成を目指します。</p>
+          </div>
+        </div>
+
+        <!-- ── 2: 画像右 / 文左（reverse クラスで簡単反転）── flex-direction:row-reverse だけ上書き ⇒ HTML は一切いじらなくてOK-->
+        <div class="course-item reverse">
+          <figure><img src="./img/course_02.jpg" alt="" /></figure>
+          <div class="course-text">
+            <h4>必要な知識もしっかりと取得</h4>
+            <p>チーズ作りには、しっかりとした食に関する知識が</p>
+            <p>欠かせません。チーズアカデミーでは、一流講師陣による、</p>
+            <p>チーズ作りに必要ないろはを余すところなく学べます。</p>
+            <p>チーズそのものでなく、栄養学全般を学ぶことも</p>
+            <p>可能ですので、チーズ以外への展開も夢ではないでしょう。</p>
+          </div>
+        </div>
+
+        <!-- ── 3: 画像左 / 文右 ── -->
+        <div class="course-item">
+          <figure><img src="./img/course_03.jpg" alt="" /></figure>
+          <div class="course-text">
+            <h4>卒業制作はティスティング審査あり</h4>
+            <p>チーズアカデミーでは最後の2ヶ月間で卒業制作を実施。</p>
+            <p>卒業制作として、チーズ作りを実際に行います。卒業後、</p>
+            <p>一般参加によるティスティング審査があるため、作り手の</p>
+            <p>目線だけでなく、消費者の目線から、卒業制作作品としての</p>
+            <p>チーズを、しっかりと評価いただくことができます。</p>
+          </div>
+        </div>
+      </div><!-- /course-stack CSS で display:flex; flex-direction:column; gap:0 → 3 つの講座を縦積み。-->
+    </section>
+
+    <!-- ===== News ===== -->
+    <section id="news" class="section" data-animate>
+      <h3 class="sec-head">NEWS</h3>
+
+      <div class="news-grid"><!-- CSS Grid でカードレイアウト -->
+        <!-- News Card ×3（同構造なのでコメントは 1 枚目に代表） -->
+        <article class="card"><!-- article: 独立した記事単位 -->
+          <figure><img src="./img/news_img.jpg" alt="" /></figure>
+          <time datetime="2016-11-18">2016.11.18</time>
+          <h4>Kosuge Pizzaオープン</h4>
+          <p>チーズアカデミー卒業生のコスゲさんによる</p>
+          <p>チーズだけをふんだんに使用した話題のピザ屋</p>
+          <p>「Kosuge Pizza」が渋谷でオープンしました！</p>
+        </article>
+
+        <!-- 以下 2 枚は内容重複のため省略コメントのみ -->
+        <article class="card">
+          <figure><img src="./img/news_img.jpg" alt="" /></figure>
+          <time datetime="2016-11-18">2016.11.18</time>
+          <h4>Kosuge Pizzaオープン</h4>
+          <p>チーズアカデミー卒業生のコスゲさんによる</p>
+          <p>チーズだけをふんだんに使用した話題のピザ屋</p>
+          <p>「Kosuge Pizza」が渋谷でオープンしました！</p>
+        </article>
+        
+        <article class="card">
+          <figure><img src="./img/news_img.jpg" alt="" /></figure>
+          <time datetime="2016-11-18">2016.11.18</time>
+          <h4>Kosuge Pizzaオープン</h4>
+          <p>チーズアカデミー卒業生のコスゲさんによる</p>
+          <p>チーズだけをふんだんに使用した話題のピザ屋</p>
+          <p>「Kosuge Pizza」が渋谷でオープンしました！</p>
+        </article>
+      </div>
+
+      <a href="#" class="btn primary wide center">MORE</a>
+      <!-- center で display:block & margin:auto に -->
+    </section>
+
+    <!-- ===== Access ===== -->
+    <section id="access" class="section" data-animate>
+      <h3 class="sec-head">Access</h3>
+      <p class="lead">会社情報</p>
+
+      <div class="map-card">
+        <!-- Google Maps 埋め込み。loading="lazy" で遅延読込 -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6482.75174977322!2d139.70881914445707!3d35.66774579036616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d0012f10e49%3A0xd25b5586f6b49e2b!2z6Z2S5pyL44OT44Or!5e0!3m2!1sja!2sjp!4v1746413179781!5m2!1sja!2sjp" width="1200" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          loading="lazy"
+          title="アクセスマップ"
+        ></iframe>
+      </div>
+
+      <!-- dl で定義リスト: ラベル(dt) + 値(dd) -->
+      <dl class="address-list">
+        <dt>学校名</dt><dd>チーズアカデミーTOKYO</dd>
+        <dt>事務所所在地</dt><dd>〒107-0061 東京都港区北青山 3-5-6 青朋ビル 2F</dd>
+        <dt>TEL</dt><dd>03-5413-5045</dd>
+        <dt>FAX</dt><dd>03-5413-5046</dd>
+        <dt>MAIL</dt><dd>dummy@cheeseacademy.tokyo</dd>
+      </dl>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="section contact-form-section" data-animate>
+      <h3 class="sec-head">CONTACT</h3>
+      <p class="lead">資料請求／お問い合わせはこちら</p>
+
+      <div class="contact-form-container">
+        <form action="#" method="post" class="contact-form">
+          <!-- Grid 2 列: ラベル240px + 入力フィールド -->
+          <div class="form-group">
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="kana">カナ</label>
+            <input type="text" id="kana" name="kana" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="source">チーズアカデミーを<br />知ったきっかけ</label>
+            <select id="source" name="source" required>
+              <option value="">選択してください</option>
+              <option value="google">Google</option>
+              <option value="sns">SNS</option>
+              <option value="referrel">紹介</option>
+              <option value="walking">たまたま通りかかった</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>志望動機</label>
+            <div class="checkbox-group">
+              <!-- accent-color でブランド色チェックボックス -->
+              <label><input type="checkbox" name="motivation" value="start_business" /> 起業をしたい</label>
+              <label><input type="checkbox" name="motivation" value="employment" /> チーズ系企業に就職・転職したい</label>
+              <label><input type="checkbox" name="motivation" value="related-work" /> チーズと関わる仕事をしており、仕事に生かしたい</label>
+              <label><input type="checkbox" name="motivation" value="education" /> 教養を身に着けたい</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="details">詳細</label>
+            <textarea name="details" id="details" rows="4" required></textarea>
+          </div>
+        </form>
+
+        <!-- 送信ボタンはフォーム外で中央寄せ -->
+        <div class="form-submit">
+          <button class="btn primary wide">送信</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PageTop & Footer ===== -->
+  <p class="page-top"><a href="#top">▲</a></p>
+
+  <footer class="footer">
+    <small>copyright ©2024 Cheese Academy Tokyo</small>
+  </footer>
+
+  <!-- ===== Scroll-fade JS ===== -->
+  <script>
+    /* IntersectionObserver で data-animate 要素をフェードイン */
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((el) =>
+          el.target.classList.toggle('is-show', el.isIntersecting)
+        );
+      },
+      { threshold: 0.30 } // 15% 表示で発火
+    );
+    document.querySelectorAll('[data-animate]').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+/* ----------------------------------------------------------------
+   0. 変数 & リセット
+---------------------------------------------------------------- */
+:root {
+    --primary: #f6c645;
+    --accent:  #13735f;
+    --gray:    #f4f4f4;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html      { scroll-behavior: smooth; }
+  body      { font-family: 'Noto Sans JP', sans-serif; line-height: 1.6; color: #333; }
+  img       { max-width: 100%; height: auto; display: block; }
+  a         { text-decoration: none; color: inherit; }
+  
+  /* ----------------------------------------------------------------
+     1. レイアウト幅
+  ---------------------------------------------------------------- */
+  .wrap1200 {
+    max-width: 1200px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  
+  /* ----------------------------------------------------------------
+     2. Header
+  ---------------------------------------------------------------- */
+  .header {
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  }
+  
+  .header .inner {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: .4rem .8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo img { height: 52px; width: auto; }
+  
+  .nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  
+  .nav-link {
+    position: relative;
+    padding: .8rem 0;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: .3rem;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: .3s;
+    transform-origin: left;
+  }
+  
+  .nav-link:hover::after,
+  .nav-link:focus::after {
+    width: 100%;
+  }
+  
+  /* ----------------------------------------------------------------
+     3. ボタン
+  ---------------------------------------------------------------- */
+  .btn {
+    display: inline-block;
+    padding: .8em 2.5em;
+    border-radius: 50px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: .3s;
+  }
+  
+  .btn.primary       { background: var(--primary); color: #000; }
+  .btn.primary:hover { background: #ffda62; }
+  
+  .btn.outline       { color: var(--primary); border-color: var(--primary); }
+  .btn.outline:hover { background: var(--primary); color: #000; }
+  
+  .center { display: block; margin: 2rem auto 0; text-align: center; width: max-content; }
+  .wide   { width: 220px;   display: inline-block; text-align: center; }
+  
+  .btn.center,
+  .btn.wide.center {
+    display: block !important;
+    margin: 2rem auto 0 !important;
+    width: 220px;
+  }
+  
+  /* ----------------------------------------------------------------
+     4. Hero (パララックス)
+  ---------------------------------------------------------------- */
+  .hero {
+    height: 80vh;
+    background: url(../img/mainbg.png) center / cover fixed;
+    position: relative;
+    margin-bottom: 6rem;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35));
+  }
+  
+  .hero-inner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: #fff;
+    z-index: 1;
+  }
+  
+  .hero-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; letter-spacing: .08em; }
+  .hero-sub   { margin: .5rem 0 1.5em; font-size: 1.5rem; }
+  
+  /* ----------------------------------------------------------------
+     5. Section 共通
+  ---------------------------------------------------------------- */
+  section          { scroll-margin-top: 120px; }
+  .section         { margin-bottom: 6rem; }
+  .sec-head        { text-align: center; font-size: 2.2rem; font-weight: 700; margin-bottom: 1.2rem; }
+  .lead            { text-align: center; margin-bottom: 2rem; font-size: 1.1rem; }
+  
+  /* ----------------------------------------------------------------
+     6. About
+  ---------------------------------------------------------------- */
+  .about-text    { text-align: center; display: grid; gap: .5rem; }
+  .about-gallery {
+    display: grid;
+    gap: .5rem;
+    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+  
+  /* ----------------------------------------------------------------
+     7. Course
+  ---------------------------------------------------------------- */
+  .course-head      { background: #fff; padding: 3rem 1rem; text-align: center; }
+  .course-stack     { display: flex; flex-direction: column; gap: 0; margin-top: 4rem; }
+  
+  .course-item      { display: flex; align-items: stretch; gap: 0; }
+  .course-item.reverse { flex-direction: row-reverse; }
+  
+  .course-item figure { max-width: none; flex: 0 0 50%; }
+  
+  .course-text {
+    flex: 0 0 50%;
+    background-color: #fafafa;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .course-text h4 { margin-bottom: .75rem; font-size: 1.25rem; color: var(--accent); }
+  .course-text p  { line-height: 1.6; }
+  
+  /* ---- Mobile (≤600px): 縦積み ---- */
+  @media (max-width: 600px) {
+    .course-item,
+    .course-item.reverse          { flex-direction: column; }
+    .course-item figure,
+    .course-text                  { flex: 0 0 auto; width: 100%; }
+    .course-text                  { padding: 1.5rem; text-align: center; }
+  }
+  
+  /* ----------------------------------------------------------------
+     8. News
+  ---------------------------------------------------------------- */
+  .news-grid {
+    display: grid;
+    gap: 2rem;
+    margin: 2.5rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+    transition: .3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .16);
+  }
+  
+  .card time { display: block; font-size: .8rem; color: #666; margin: .8rem 1rem 0; }
+  .card h4   { font-size: 1rem; margin: .3rem 1rem; }
+  .card p    { font-size: .9rem; margin: .3rem 1rem 1rem; line-height: 1.4; }
+  
+  /* ----------------------------------------------------------------
+     9. Map
+  ---------------------------------------------------------------- */
+  .map-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+  }
+  
+  .map-card iframe { width: 100%; height: 350px; border: 0; }
+  
+  /* ----------------------------------------------------------------
+     Access: 住所 2 列整列
+  ---------------------------------------------------------------- */
+  .address-list {
+    max-width: 500px;          /* 好みで調整 */
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    row-gap: 1.2rem;
+    column-gap: 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .address-list dt { font-weight: 700; color: var(--accent); }
+  .address-list dd { margin: 0; }
+  
+  @media (max-width: 600px) {
+    .address-list { grid-template-columns: 1fr; }
+  }
+  
+  /* ----------------------------------------------------------------
+     Contact 専用レイアウト
+  ---------------------------------------------------------------- */
+  .contact-form-section  { display: flex; flex-direction: column; align-items: center; }
+  .contact-form-container{ padding: 0 16px; width: 100%; }
+  
+  .contact-form {
+    position: relative;
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  /* 縦罫線 */
+  .contact-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 240px;
+    bottom: 0;
+    width: 1px;
+    background: #bfbfbf;
+    z-index: 0;
+  }
+  
+  /* 行レイアウト */
+  .contact-form .form-group {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-top: 1px solid #bfbfbf;
+  }
+  
+  .contact-form .form-group:last-of-type { border-bottom: 1px solid #bfbfbf; }
+  
+  /* ラベル */
+  .contact-form .form-group label {
+    padding-left: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  /* インプット・選択肢 */
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form select {
+    width: 400px;
+    height: 36px;
+    margin-left: 12px;
+    padding: 8px;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* テキストエリア */
+  .contact-form textarea {
+    width: 400px;
+    height: 100px;
+    margin-left: 12px;
+    padding: 8px;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  
+  /* チェックボックス */
+  .checkbox-group        { margin-left: 12px; display: flex; flex-direction: column; gap: 1rem; }
+  .checkbox-group label  { display: flex; align-items: center; font-size: 1rem; font-weight: 400; }
+  
+  .checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    accent-color: var(--accent);
+  }
+  
+  /* ボタン行は縦罫線を貫通しないよう左セルを空に */
+  .button-group      { grid-template-columns: 1fr; border-bottom: 0; padding-top: 24px; }
+  .button-group button { border: 0; }
+  
+  /* ---- Mobile ---- */
+  @media (max-width: 600px) {
+    .contact-form::before { display: none; }
+    .contact-form .form-group {
+      grid-template-columns: 1fr;
+      border-left: 0;
+    }
+  
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form select,
+    .contact-form textarea {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    .checkbox-group { margin-left: 0; }
+  }
+  
+  /* 送信ボタン中央寄せ */
+  .form-submit {
+    text-align: center;
+    margin: 2rem 0 0; /* フォームとの間隔 */
+  }
+  
+  .form-submit .btn { border: 0; /* 表の罫線対策 */ }
+  
+  /* ----------------------------------------------------------------
+     11. PageTop
+  ---------------------------------------------------------------- */
+  .page-top {
+    text-align: right;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1rem 1rem;
+  }
+  
+  .page-top a {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    border-radius: 50%;
+    line-height: 48px;
+    text-align: center;
+    font-weight: 700;
+    color: #000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+  }
+  
+  /* ----------------------------------------------------------------
+     12. Footer
+  ---------------------------------------------------------------- */
+  .footer {
+    background: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: .8rem;
+  }
+  
+  /* ----------------------------------------------------------------
+     13. Scroll-fade
+  ---------------------------------------------------------------- */
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: .6s ease;
+  }
+  
+  [data-animate].is-show { opacity: 1; transform: none; }
+  
+  @media (prefers-reduced-motion: reduce) {
+    [data-animate] { opacity: 1 !important; transform: none !important; }
+  }
+  
+  /* ----------------------------------------------------------------
+     14. Responsive (≤600px)
+  ---------------------------------------------------------------- */
+  @media (max-width: 600px) {
+    .wrap1200,
+    .header .inner,
+    .page-top { width: 100%; }
+  
+    .nav ul          { gap: 1rem; font-size: .85rem; }
+    .about-gallery   { grid-template-columns: repeat(2, 1fr); }
+    .page-top        { text-align: center; }
+  }
+  
